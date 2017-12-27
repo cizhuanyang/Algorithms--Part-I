@@ -3,6 +3,10 @@ package Percolation;
 import edu.princeton.cs.algs4.WeightedQuickUnionUF;
 
 
+/**
+ * @author FrouFrou
+ * this is programming assignment for algs4 week 1 
+ */
 public class Percolation {
 	private WeightedQuickUnionUF weightedQuickUnionUF;
 	private WeightedQuickUnionUF weightedQuickUnionUFIsFull;
