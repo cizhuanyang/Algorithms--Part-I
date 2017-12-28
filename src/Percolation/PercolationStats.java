@@ -1,8 +1,7 @@
 package Percolation;
-import java.util.Random;
-
-import edu.princeton.cs.algs4.*;
-
+import edu.princeton.cs.algs4.StdRandom;
+import edu.princeton.cs.algs4.StdStats;
+import edu.princeton.cs.algs4.StdOut;
 public class PercolationStats {
 	private double mean;
 	private double stddev;
@@ -22,10 +21,10 @@ public class PercolationStats {
 			while(!percolation.percolates()) {
 				int row;
 				int col;
-				Random random=new Random();
+				
 				do {
-					row=1+random.nextInt(N);
-					col=1+random.nextInt(N);
+					col = 1 + StdRandom.uniform(N);
+                    row = 1 + StdRandom.uniform(N);
 				}while(percolation.isOpen(row, col));
 				percolation.open(row, col);
 				numofopen++;

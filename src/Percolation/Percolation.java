@@ -1,5 +1,4 @@
 package Percolation;
-
 import edu.princeton.cs.algs4.WeightedQuickUnionUF;
 
 
@@ -11,14 +10,15 @@ public class Percolation {
 	private WeightedQuickUnionUF weightedQuickUnionUF;
 	private WeightedQuickUnionUF weightedQuickUnionUFIsFull;
 	private int gridsize;
-	private int[][] grid;
+	private boolean[][] grid;
 	private int virtualTopSite;
 	private int virtualBottomSite;
+	private int numOfOpen;
 	public Percolation(int n) {
 		if(n<0)
 			throw new IllegalArgumentException("n must be at least 1");
 		gridsize=n;
-		grid=new int[n][n];
+		grid=new boolean[n][n];
 		weightedQuickUnionUF=new WeightedQuickUnionUF(n*n+2);
 		weightedQuickUnionUFIsFull=new WeightedQuickUnionUF(n*n+1);
 		virtualTopSite=0;
@@ -39,10 +39,11 @@ public class Percolation {
 		connectIfOpen(index,row+1, col);
 		connectIfOpen(index,row, col-1);
 		connectIfOpen(index,row, col+1);
-		grid[row-1][col-1]=1;
+		grid[row-1][col-1]=true;
+		numOfOpen++;
 	}
 	public boolean isOpen(int row,int col) {
-		return grid[row-1][col-1]==1;
+		return grid[row-1][col-1]==true;
 	}
 	public boolean isFull(int row,int col) {
 		return weightedQuickUnionUFIsFull.connected(virtualTopSite, getIndexInQuickFindStructure(row, col));
@@ -63,6 +64,9 @@ public class Percolation {
 		}
 		
 	}
+	public int numberOfOpenSites(){
+		return numOfOpen;
+	} 
 	private int getIndexInQuickFindStructure(int row,int col) {
 		return (row-1)*gridsize+col;
 	}
